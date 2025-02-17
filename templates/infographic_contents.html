@@ -51,11 +51,18 @@
 
         <div class="follow-ups-list">
             {% for follow_up in data["follow_ups"] %}
-            <div class="section">
-                <i class="fas fa-calendar-alt icon"></i>
-                <span>{{ follow_up }}</span>
-            </div>
+                <div class="section">
+                    {% if 'heart' in follow_up|lower %}
+                        <i class="fas fa-heartbeat icon"></i>
+                    {% elif 'gp' in follow_up|lower %}
+                        <i class="fas fa-user-md icon"></i>
+                    {% else %}
+                        <i class="fas fa-calendar-alt icon"></i>
+                    {% endif %}
+                    <span>{{ follow_up }}</span>
+                </div>
             {% endfor %}
+
         </div>
     </div>
 
@@ -69,7 +76,13 @@
         <div class="home-monitoring-list">
             {% for home_monitoring in data["home_monitoring"] %}
             <div class="section">
-                <i class="fas fa-home icon"></i>
+                {% if 'weight' in home_monitoring|lower %}
+                    <i class="fas fa-weight icon"></i>
+                {% elif 'fluid' in home_monitoring|lower %}
+                    <i class="fas fa-tint icon"></i>
+                {% else %}
+                    <i class="fas fa-home icon"></i>
+                {% endif %}
                 <span>{{ home_monitoring }}</span>
             </div>
             {% endfor %}

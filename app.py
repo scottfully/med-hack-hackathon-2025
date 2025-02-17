@@ -102,7 +102,7 @@ def load_data():
 
 @app.route('/')
 def home():
-    return render_template('Frontend.html')
+    return render_template('frontend.html')
     # return 'Flask app is running'
 
 @app.route('/infographic')

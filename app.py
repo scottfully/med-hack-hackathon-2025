@@ -16,6 +16,8 @@ load_dotenv()
 # put the OPENAI_API_KEY in the .env file
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
+SYSTEM_AI_PROMPT = "You must convert doctor discharge summaries to a more simple form that can be read by patients and in a structured JSON output.\n\n"
+
 AI_PROMPT = """Summarise the discharge summary to a format we use in simple terms. 
 Rules:
 Make sure you use the real names of specialists and services like GP and Respiratory clinic and procedures are kept, this is important. 
@@ -50,7 +52,7 @@ def generate_infographics():
             model="gpt-4",
             messages=[{
                 "role": "system",
-                "content": "You must convert doctor discharge summaries to a more simple form that can be read by patients and in a structured JSON output.\n\n"
+                "content": SYSTEM_AI_PROMPT
             }, {
                 "role": "user",
                 "content": f"""{AI_PROMPT} 

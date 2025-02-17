@@ -19,98 +19,23 @@ load_dotenv()
 # put the OPENAI_API_KEY in the .env file
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
-
-def load_data():
-
-    return """{
-    "discharge to": "Home",
-    "medications": [
-        "Start Ozempic 0.25mg for 4 weeks, then increase to 0.5mg for 4 weeks, then to 0.75mg for 4 weeks if there are no side effects",
-        "Reduce Optisulin to 22 units every night",
-        "Continue other oral hypoglycaemics at the current dose"
-    ],
-    "follow ups": [
-        "Review in 3 months",
-        "Get blood tests done again",
-        "Follow up with GP for diet advice",
-        "Appointment with a podiatrist in 2 weeks"
-    ],
-    "home monitoring": [
-        "Weigh yourself every week"
-    ],
-    "other": [
-        "Given a pamphlet and script for Ozempic",
-        "Diabetes Australia hotline number was given",
-        "A diabetic nurse will educate you on how to use a glucometer next week"
-    ]
-}"""
-
-#     return """{
-#     "discharge to": "community heart failure service",
-#     "medications": [
-#         "Stopped Hydrochlorthiazde",
-#         "Started Amiodarone",
-#         "Started Metoporlol",
-#         "Started Empagliozin"
-#     ],
-#     "follow ups": [
-#         "Referral to heart function clinic in 4 weeks with ECHO done prior",
-#         "GP review for renal function in one week with blood test done prior"
-#     ],
-#     "home monitoring": ["Fluid restriction to 1.5 Litres","daily weight monitoring"],
-#     "other": ["Cardio rehab program"]
-# }"""
-
-#     return """{
-#     "discharge to": "None",
-#     "medications": [
-#         "Stopped Hydrochlorothiazide.",
-#         "Started Spironolactone."
-#     ],
-#     "follow ups": [
-#         "Visit GP in a week with repeated chest X-ray and urine test done prior.",
-#         "Respiratory clinic review in 6 weeks with respiratory function test and high-resolution chest CT scan done prior."
-#     ],
-#     "home monitoring": ["None"],
-#     "other": ["None"]
-# }"""
-
-
-
-
-
-#     return """{
-#   "medicine_start": ["spironolactone"],
-#   "medicine_stop": ["hydrochlorothiazide"],
-#   "next_consultation": [
-#     {
-#       "when": "in 7 days",
-#       "where": "GP clinic",
-#       "with_who": "GP",
-#       "tests_to_be_done": ["chest X-ray", "urine test"]
-#     },
-#     {
-#       "when": "in 42 days",
-#       "where": "respiratory clinic",
-#       "with_who": "respiratory specialist",
-#       "tests_to_be_done": ["respiratory function test", "High Resolution Chest CT scan"]
-#     }
-#   ]
-# }"""
-
+AI_PROMPT = """Summarise the discharge summary to a format we use in simple terms. 
+Rules:
+Make sure you use the real names of specialists and services like GP and Respiratory clinic and procedures are kept, this is important. 
+Only summarise the explanation points. 
+Try to explain this in simple terms.
+Put the information into the following categories: "discharge to", "medications", "follow ups", "home monitoring", "other".
+For each category the information should be one line per instruction. 
+The medications should be 1 line for each medication and instructions. 
+Do not include 2 medications in line line item.
+If it mentions "done prior" or similar you must include this information.
+If there is no reference to the category explicitly stated in "medications", "follow ups", "home monitoring", "other" just put a single ["None"] for "discharge to" just put "None". 
+Output to a JSON format."""
 
 
 @app.route('/')
 def home():
     return render_template('frontend.html')
-    # return 'Flask app is running'
-
-@app.route('/infographic')
-def infographic():
-    json_text = load_data()  # Load JSON data
-    # Convert the JSON text to a Python dictionary
-    data = json.loads(json_text)
-    return render_template('infographic.html', data=data)
 
 
 @app.route('/generate-infographics', methods=['POST'])
@@ -131,18 +56,7 @@ def generate_infographics():
                 "content": "You must convert doctor discharge summaries to a more simple form that can be read by patients and in a structured JSON output.\n\n"
             }, {
                 "role": "user",
-                "content": f"""Summarise the discharge summary to a format we use in simple terms. 
-Rules:
-Make sure you use the real names of specialists and services like GP and Respiratory clinic and procedures are kept, this is important. 
-Only summarise the explanation points. 
-Try to explain this in simple terms.
-Put the information into the following categories: "discharge to", "medications", "follow ups", "home monitoring", "other".
-For each category the information should be one line per instruction. 
-The medications should be 1 line for each medication and instructions. 
-Do not include 2 medications in line line item.
-If it mentions "done prior" or similar you must include this information.
-If there is no reference to the category explicitly stated in "medications", "follow ups", "home monitoring", "other" just put a single ["None"] for "discharge to" just put "None". 
-Output to a JSON format. 
+                "content": f"""{AI_PROMPT} 
 
 {text}
                 """

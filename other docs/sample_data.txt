@@ -1,0 +1,52 @@
+return """{
+    "discharge to": "Home",
+    "medications": [
+        "Start Ozempic 0.25mg for 4 weeks, then increase to 0.5mg for 4 weeks, then to 0.75mg for 4 weeks if there are no side effects",
+        "Reduce Optisulin to 22 units every night",
+        "Continue other oral hypoglycaemics at the current dose"
+    ],
+    "follow ups": [
+        "Review in 3 months",
+        "Get blood tests done again",
+        "Follow up with GP for diet advice",
+        "Appointment with a podiatrist in 2 weeks"
+    ],
+    "home monitoring": [
+        "Weigh yourself every week"
+    ],
+    "other": [
+        "Given a pamphlet and script for Ozempic",
+        "Diabetes Australia hotline number was given",
+        "A diabetic nurse will educate you on how to use a glucometer next week"
+    ]
+}"""
+
+#     return """{
+#     "discharge to": "community heart failure service",
+#     "medications": [
+#         "Stopped Hydrochlorthiazde",
+#         "Started Amiodarone",
+#         "Started Metoporlol",
+#         "Started Empagliozin"
+#     ],
+#     "follow ups": [
+#         "Referral to heart function clinic in 4 weeks with ECHO done prior",
+#         "GP review for renal function in one week with blood test done prior"
+#     ],
+#     "home monitoring": ["Fluid restriction to 1.5 Litres","daily weight monitoring"],
+#     "other": ["Cardio rehab program"]
+# }"""
+
+#     return """{
+#     "discharge to": "None",
+#     "medications": [
+#         "Stopped Hydrochlorothiazide.",
+#         "Started Spironolactone."
+#     ],
+#     "follow ups": [
+#         "Visit GP in a week with repeated chest X-ray and urine test done prior.",
+#         "Respiratory clinic review in 6 weeks with respiratory function test and high-resolution chest CT scan done prior."
+#     ],
+#     "home monitoring": ["None"],
+#     "other": ["None"]
+# }"""

@@ -1,13 +1,10 @@
 from dotenv import load_dotenv
 import os
-import io
-import base64
 import json
 
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import openai
-# import matplotlib.pyplot as plt
 
 # Initialize Flask
 app = Flask(__name__)

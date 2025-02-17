@@ -16,6 +16,41 @@ load_dotenv()
 # put the OPENAI_API_KEY in the .env file
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
+#  JSON Schema format
+# {
+#   "type": "object",
+#   "properties": {
+#     "discharge_to": {
+#       "type": "string"
+#     },
+#     "medications": {
+#       "type": "array",
+#       "items": {
+#         "type": "string"
+#       }
+#     },
+#     "follow_ups": {
+#       "type": "array",
+#       "items": {
+#         "type": "string"
+#       }
+#     },
+#     "home_monitoring": {
+#       "type": "array",
+#       "items": {
+#         "type": "string"
+#       }
+#     },
+#     "other": {
+#       "type": "array",
+#       "items": {
+#         "type": "string"
+#       }
+#     }
+#   },
+#   "required": ["discharge_to", "medications", "follow_ups", "home_monitoring", "other"]
+# }
+
 SYSTEM_AI_PROMPT = "You must convert doctor discharge summaries to a more simple form that can be read by patients and in a structured JSON output.\n\n"
 
 AI_PROMPT = """Summarise the discharge summary to a format we use in simple terms. 
@@ -23,13 +58,25 @@ Rules:
 Make sure you use the real names of specialists and services like GP and Respiratory clinic and procedures are kept, this is important. 
 Only summarise the explanation points. 
 Try to explain this in simple terms.
-Put the information into the following categories: "discharge to", "medications", "follow ups", "home monitoring", "other".
+Put the information into the following categories: "discharge_to", "medications", "follow_ups", "home_monitoring", "other".
 For each category the information should be one line per instruction. 
-The medications should be 1 line for each medication and instructions. 
+The medications should be 1 line for each medication and instructions.
+If you see referred to you can put it in the other section 
 Do not include 2 medications in line line item.
 If it mentions "done prior" or similar you must include this information.
-If there is no reference to the category explicitly stated in "medications", "follow ups", "home monitoring", "other" just put a single ["None"] for "discharge to" just put "None". 
-Output to a JSON format."""
+If there is no mention of discharge set the discharge_to to "Home".
+If there is no reference to the category explicitly stated in "medications", "follow_ups", "home_monitoring", "other" just put a single ["None"] for "discharge_to" just put "None". 
+Output to the following JSON format and only include the JSON and no extra text.:
+
+{
+    discharge_to: string,
+    medications: [string],
+    follow_ups: [string],
+    home_monitoring: [string],
+    other: [string],
+
+}
+"""
 
 
 @app.route('/')
@@ -61,7 +108,11 @@ def generate_infographics():
                 """
             }]
         )
+        
         summary = response.choices[0].message.content.strip()  # Extract the structured summary (JSON)
+        # Debugging to show ChatGPT output
+        # print(summary)
+
     except Exception as e:
         return jsonify({'error': f'Error generating summary: {str(e)}'}), 500
 

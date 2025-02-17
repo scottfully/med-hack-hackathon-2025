@@ -21,7 +21,7 @@
     <div class="category">
         <div class="category-title">
             <i class="fas fa-door-open icon"></i>
-            <span>Discharge To: {{ data["discharge to"] }}</span>
+            <span>Discharge To: {{ data["discharge_to"] }}</span>
         </div>
     </div>
     
@@ -50,7 +50,7 @@
         </div>
 
         <div class="follow-ups-list">
-            {% for follow_up in data["follow ups"] %}
+            {% for follow_up in data["follow_ups"] %}
             <div class="section">
                 <i class="fas fa-calendar-alt icon"></i>
                 <span>{{ follow_up }}</span>
@@ -67,7 +67,7 @@
         </div>
 
         <div class="home-monitoring-list">
-            {% for home_monitoring in data["home monitoring"] %}
+            {% for home_monitoring in data["home_monitoring"] %}
             <div class="section">
                 <i class="fas fa-home icon"></i>
                 <span>{{ home_monitoring }}</span>

@@ -108,12 +108,8 @@ def home():
 @app.route('/infographic')
 def infographic():
     json_text = load_data()  # Load JSON data
-
     # Convert the JSON text to a Python dictionary
     data = json.loads(json_text)
-
-    # print(render_template('infographic.html', data=data))
-    # exit()
     return render_template('infographic.html', data=data)
 
 
@@ -122,58 +118,9 @@ def generate_infographics():
     data = request.get_json()
     text = data.get('text', '')  
 
-    # Discharge summary data
-    discharge_data = {
-        "discharge_to": "Home",
-        "pills": [
-            {"drug_name": "Spironolactone 25mg", "status": "increase", "stop_date": None},
-            {"drug_name": "Telmisartan 40mg", "status": "decrease", "stop_date": None},
-            {"drug_name": "Amoxicillin 1g", "status": "stop_on_date", "stop_date": "2025-02-20"}
-        ],
-        "gp_followup": {
-            "date_in_days": 7,
-            "medication_to_followup": "Blood Pressure Medication"
-        },
-        "clinic_followup": {
-            "repeat_bloods_date": "2025-03-01",
-            "repeat_imaging_date": "2025-03-10"
-        },
-        "home_monitoring": [
-            {"monitoring_type": "BSLs", "frequency": "Twice daily"},
-            {"monitoring_type": "Blood pressure", "frequency": "Once daily"},
-            {"monitoring_type": "Weight", "frequency": "Weekly"},
-            {"monitoring_type": "Fever", "frequency": "If symptomatic"}
-        ]
-    }
-
     if not text:
         return jsonify({'error': 'No text provided'}), 400
     
-
-    # "content": f"""Convert this discharge summary to structured JSON format {text} 
-    #                 discharge_to: string,                                              
-    #                 pills:
-    #                 [
-    #                     drug_name: string               
-    #                     status: (stop / increase / decrease / stop_on_date)
-    #                     stop_date: date (optional if Stop On Date)
-    #                 ],
-    #                 gp_followup:
-    #                 {{
-    #                     date_in_days: integer
-    #                     medication_to_followup: string
-    #                 }},
-    #                 clinic_followup:
-    #                 {{
-    #                     repeat_bloods_date: date
-    #                     repeat_imaging_date: date
-    #                 }},
-    #                 home_monitoring:
-    #                 [
-    #                     monitoring_type: (BSLs, blood pressure, weight, fever)
-    #                     frequency: string
-    #                 ] only follow the above schema in the output
-    #             """
 
     # Step 1: Generate structured JSON output using OpenAI API
     try:
@@ -205,37 +152,13 @@ Output to a JSON format.
     except Exception as e:
         return jsonify({'error': f'Error generating summary: {str(e)}'}), 500
 
-    # Extract event-related data for visualization
-    # try:
-    #     events = ["Referral", "Medication Start", "Follow-up", "Test"]
-    #     values = [discharge_data["gp_followup"]["date_in_days"], 4, 7, 3]  # Example dynamic data
-
-    #     fig, ax = plt.subplots()
-    #     ax.bar(events, values, color='skyblue')
-
-    #     ax.set_title("Medical Event Overview")
-    #     ax.set_xlabel("Events")
-    #     ax.set_ylabel("Severity / Days")
-    #     ax.set_ylim(0, max(values) + 1)  
-
-    #     buf = io.BytesIO()
-    #     plt.savefig(buf, format='png')
-    #     buf.seek(0)
-
-    #     img_base64 = base64.b64encode(buf.read()).decode('utf-8')
-    # except Exception as e:
-    #     return jsonify({'error': f'Error generating infographic: {str(e)}'}), 500
-    
     # if we return a json object we may not need to do this
     discharge_json_data = json.loads(summary)
     rendered_infographic = render_template('infographic_contents.html', data=discharge_json_data)
-                    
-    # 'images': [f"data:image/png;base64,{img_base64}"],
-
+ 
     # Step 3: Return the structured summary and infographic
     return jsonify({
         'summary': summary,
-        'discharge_data': discharge_data,
         'infographic_html': rendered_infographic
     })
 

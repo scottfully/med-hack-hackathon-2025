@@ -252,7 +252,7 @@
                 document.getElementById("loading").style.display = "inline-block";
                 
                 // Send the input text to the backend (AI service)
-                const response = await fetch('http://localhost:5000/generate-infographics', {  // Use /api for reverse proxy
+                const response = await fetch('/generate-infographics', {  // Use /api for reverse proxy
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

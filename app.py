@@ -7,7 +7,7 @@ import json
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import openai
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 # Initialize Flask
 app = Flask(__name__)
@@ -206,36 +206,36 @@ Output to a JSON format.
         return jsonify({'error': f'Error generating summary: {str(e)}'}), 500
 
     # Extract event-related data for visualization
-    try:
-        events = ["Referral", "Medication Start", "Follow-up", "Test"]
-        values = [discharge_data["gp_followup"]["date_in_days"], 4, 7, 3]  # Example dynamic data
+    # try:
+    #     events = ["Referral", "Medication Start", "Follow-up", "Test"]
+    #     values = [discharge_data["gp_followup"]["date_in_days"], 4, 7, 3]  # Example dynamic data
 
-        fig, ax = plt.subplots()
-        ax.bar(events, values, color='skyblue')
+    #     fig, ax = plt.subplots()
+    #     ax.bar(events, values, color='skyblue')
 
-        ax.set_title("Medical Event Overview")
-        ax.set_xlabel("Events")
-        ax.set_ylabel("Severity / Days")
-        ax.set_ylim(0, max(values) + 1)  
+    #     ax.set_title("Medical Event Overview")
+    #     ax.set_xlabel("Events")
+    #     ax.set_ylabel("Severity / Days")
+    #     ax.set_ylim(0, max(values) + 1)  
 
-        buf = io.BytesIO()
-        plt.savefig(buf, format='png')
-        buf.seek(0)
+    #     buf = io.BytesIO()
+    #     plt.savefig(buf, format='png')
+    #     buf.seek(0)
 
-        img_base64 = base64.b64encode(buf.read()).decode('utf-8')
-    except Exception as e:
-        return jsonify({'error': f'Error generating infographic: {str(e)}'}), 500
+    #     img_base64 = base64.b64encode(buf.read()).decode('utf-8')
+    # except Exception as e:
+    #     return jsonify({'error': f'Error generating infographic: {str(e)}'}), 500
     
     # if we return a json object we may not need to do this
     discharge_json_data = json.loads(summary)
     rendered_infographic = render_template('infographic_contents.html', data=discharge_json_data)
                     
+    # 'images': [f"data:image/png;base64,{img_base64}"],
 
     # Step 3: Return the structured summary and infographic
     return jsonify({
         'summary': summary,
         'discharge_data': discharge_data,
-        'images': [f"data:image/png;base64,{img_base64}"],
         'infographic_html': rendered_infographic
     })
 

@@ -1,0 +1,22 @@
+discharge_to: string,                                              
+pills:
+[
+    drug_name: string               
+    status: (stop / increase / decrease / stop_on_date)
+    stop_date: date (optional if Stop On Date)
+],
+gp_followup:
+{
+    date_in_days: integer
+    medication_to_followup: string
+},
+clinic_followup:
+{
+    repeat_bloods_date: date
+    repeat_imaging_date: date
+},
+home_monitoring:
+[
+    monitoring_type: {BSLs, blood pressure, weight, fever}
+    frequency: string
+]

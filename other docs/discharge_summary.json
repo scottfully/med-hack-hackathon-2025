@@ -1,0 +1,15 @@
+{
+    "discharge to": "community heart failure service",
+    "medications": [
+        "Stopped Hydrochlorthiazde",
+        "Started Amiodarone",
+        "Started Metoporlol",
+        "Started Empagliozin"
+    ],
+    "follow ups": [
+        "Referral to heart function clinic in 4 weeks with ECHO done prior",
+        "GP review for renal function in one week with blood test done prior"
+    ],
+    "home monitoring": "Fluid restriction to 1.5 Litres and daily weight monitoring",
+    "other": "Cardio rehab program"
+}

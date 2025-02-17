@@ -1,0 +1,28 @@
+# Leave the top 1/3 of the infographic for details such as  
+# - Patient name:  
+
+# - Date  
+# - Blank area for miscellaneous drawing  
+ 
+
+# Discharge box: 
+
+# Discharge to: home, other hospital (), GEM, Rehab 
+# If home, in addition to services: rehab @ home (RITH), hospital in the hospital (HITH), gem at home (GITH) 
+
+# Medication box:  
+# - Cease/stop 
+# - Increasing dosage 
+# - Decrease dosage 
+# - Cease on a certain date  
+
+# Follow up with GP  
+# - Repeat bloods _ timing  
+# - Titrate  
+
+# Follow up with clinic  
+# - Repeat bloods _ timing 
+# - Repeat imaging _timing 
+
+# Monitor: 
+# - BSLs, blood pressure, weight, fever

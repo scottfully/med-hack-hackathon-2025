@@ -1,0 +1,95 @@
+<!-- Input Fields Section (Above the Infographic) -->
+<div class="input-fields-container">
+    <div class="input-section">
+        <label for="patient-name">Patient Name:</label>
+        <input type="text" id="patient-name" name="patient-name">
+    </div>
+    <div class="input-section">
+        <label for="date">Date:</label>
+        <input type="text" id="date" name="date">
+    </div>
+    <div class="input-section">
+        <input type="text" id="other" name="other">
+    </div>
+    <div class="input-section">
+        <input type="text" id="other-2" name="other-2">
+    </div>
+</div>
+
+<div class="infographics_container">
+    <!-- Discharge To Section -->
+    <div class="category">
+        <div class="category-title">
+            <i class="fas fa-door-open icon"></i>
+            <span>Discharge To: {{ data["discharge to"] }}</span>
+        </div>
+    </div>
+    
+    <!-- Medications Section -->
+    <div class="category">
+        <div class="category-title">
+            <i class="fas fa-pills icon"></i>
+            <span>Medications</span>
+        </div>
+
+        <div class="medications-list">
+            {% for medication in data.medications %}
+            <div class="section">
+                <i class="fas fa-pills icon"></i>
+                <span>{{ medication }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Follow-ups Section -->
+    <div class="category">
+        <div class="category-title">
+            <i class="fas fa-calendar-check icon"></i>
+            <span>Follow-ups</span>
+        </div>
+
+        <div class="follow-ups-list">
+            {% for follow_up in data["follow ups"] %}
+            <div class="section">
+                <i class="fas fa-calendar-alt icon"></i>
+                <span>{{ follow_up }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Home Monitoring Section -->
+    <div class="category">
+        <div class="category-title">
+            <i class="fas fa-home icon"></i>
+            <span>Home Monitoring</span>
+        </div>
+
+        <div class="home-monitoring-list">
+            {% for home_monitoring in data["home monitoring"] %}
+            <div class="section">
+                <i class="fas fa-home icon"></i>
+                <span>{{ home_monitoring }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Other Section -->
+    <div class="category">
+        <div class="category-title">
+            <i class="fas fa-book icon"></i>
+            <span>Other Notes</span>
+        </div>
+
+        <div class="other-list">
+            {% for other in data["other"] %}
+            <div class="section">
+                <i class="fas fa-book icon"></i>
+                <span>{{other }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

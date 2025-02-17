@@ -5,7 +5,13 @@ Installation:
 Create an .env file with:
 OPENAI_API_KEY = 'YOUR_KEY'
 
-Optional
+To Run:
+python app.py
+
+Open the default base url e.g. http://127.0.0.1:5000/
+
+
+Optional...
 
 You can use a virtual environment
 python -m venv venv

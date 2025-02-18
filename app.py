@@ -66,14 +66,14 @@ Do not include 2 medications in line line item.
 If it mentions "done prior" or similar you must include this information.
 If there is no mention of discharge set the discharge_to to "Home".
 If there is no reference to the category explicitly stated in "medications", "follow_ups", "home_monitoring", "other" just put a single ["None"] for "discharge_to" just put "None". 
-Output to the following JSON format and only include the JSON and no extra text.:
+Output to the following JSON format and only include the JSON and no extra text. the output should start with { and end with } and not "json":
 
 {
-    discharge_to: string,
-    medications: [string],
-    follow_ups: [string],
-    home_monitoring: [string],
-    other: [string],
+    "discharge_to": string,
+    "medications": [string],
+    "follow_ups": [string],
+    "home_monitoring": [string],
+    "other": [string],
 
 }
 """
@@ -96,7 +96,9 @@ def generate_infographics():
     # Step 1: Generate structured JSON output using OpenAI API
     try:
         response = openai.chat.completions.create(
-            model="gpt-4",
+            # model="gpt-4",
+            model="gpt-4o",
+            # model="gpt-4o-mini",
             messages=[{
                 "role": "system",
                 "content": SYSTEM_AI_PROMPT
@@ -108,10 +110,10 @@ def generate_infographics():
                 """
             }]
         )
-        
+
         summary = response.choices[0].message.content.strip()  # Extract the structured summary (JSON)
         # Debugging to show ChatGPT output
-        # print(summary)
+        print('Output: ' + summary)
 
     except Exception as e:
         return jsonify({'error': f'Error generating summary: {str(e)}'}), 500

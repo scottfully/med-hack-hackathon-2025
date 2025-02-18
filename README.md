@@ -10,7 +10,7 @@ python app.py
 
 Open the default base url e.g. http://127.0.0.1:5000/
 
-#Optional#
+# Optional
 
 You can use a virtual environment:
 python -m venv venv

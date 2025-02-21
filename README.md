@@ -1,4 +1,4 @@
-# med-hack-hackathon-2025
+# med-hack Hackathon 2025 - Team SummerX
 
 Installation:
 

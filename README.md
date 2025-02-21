@@ -1,6 +1,9 @@
-# med-hack Hackathon 2025 - Team SummerX
+# Med-Hack Hackathon 2025 - Team SummerX
 
-Installation:
+The AI Generated Discharge Management Plan Infographic is an innovative solution designed to improve patient comprehension of their post-hospitalisation or treatment care. By converting traditional discharge summaries into easy-to-understand infographics, this system ensures patients can effectively follow medical instructions, reducing readmission rates and improving overall health outcomes. The system will deliver infographics via text, email, and print format, as well as offer the ability to share results with the patient’s GP.
+
+
+# Installation:
 
 Create an .env file with:
 OPENAI_API_KEY = 'YOUR_KEY'

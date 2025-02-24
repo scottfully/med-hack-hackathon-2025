@@ -18,10 +18,16 @@ Open the default base url e.g. http://127.0.0.1:5000/
 # Optional
 
 You can use a virtual environment:
+```shell
 python -m venv venv
+```
 
 Windows activate virtual environment:
+```shell
 venv\Scripts\activate
+```
 
 You should be able to install all packages with the following command:
+```shell
 pip install -r requirements.txt
+```

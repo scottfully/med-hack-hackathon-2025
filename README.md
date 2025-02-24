@@ -8,8 +8,10 @@ The AI Generated Discharge Management Plan Infographic is an innovative solution
 Create an .env file with:
 OPENAI_API_KEY = 'YOUR_KEY'
 
-To Run:
+### To Run:
+```shell
 python app.py
+```
 
 Open the default base url e.g. http://127.0.0.1:5000/
 
